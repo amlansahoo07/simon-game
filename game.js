@@ -10,29 +10,47 @@ var started = false;
 var level = 0;
 
 // Start the game on a key press
-$(document).keydown(function () {
+// $(document).keydown(function () {
+//   if (!started) {
+//     // Update the level title and start the first sequence
+//     $("h1").html("Level " + level);
+//     nextSequence();
+//     started = true;
+//   }
+// });
+
+// Start the game on key press or touch event
+$(document).on("keydown touchstart", function(event) {
   if (!started) {
-    // Update the level title and start the first sequence
-    $("h1").html("Level " + level);
-    nextSequence();
-    started = true;
+      $("h1").html("Level " + level);
+      nextSequence();
+      started = true;
   }
 });
 
 // Handle button clicks
-$(".btn").click(function () {
-  // Get the ID of the clicked button and add it to the user clicked pattern
-  var userChosenColour = $(this).attr("id");
-  userClickedPattern.push(userChosenColour);
-  console.log(userClickedPattern);
-
-  // Play the corresponding sound and animate the button press
-  playSound(userChosenColour);
-  animatePress(userChosenColour);
-
-  // Check the user's answer after each click
-  checkAnswer(userClickedPattern.length - 1);
+$(".btn").click(function() {
+  if (started) { // Check if the game has started
+      var userChosenColour = $(this).attr("id");
+      userClickedPattern.push(userChosenColour);
+      playSound(userChosenColour);
+      animatePress(userChosenColour);
+      checkAnswer(userClickedPattern.length - 1);
+  }
 });
+// $(".btn").click(function () {
+//   // Get the ID of the clicked button and add it to the user clicked pattern
+//   var userChosenColour = $(this).attr("id");
+//   userClickedPattern.push(userChosenColour);
+//   console.log(userClickedPattern);
+
+//   // Play the corresponding sound and animate the button press
+//   playSound(userChosenColour);
+//   animatePress(userChosenColour);
+
+//   // Check the user's answer after each click
+//   checkAnswer(userClickedPattern.length - 1);
+// });
 
 // Generate the next sequence in the game pattern
 function nextSequence() {
@@ -96,7 +114,7 @@ function checkAnswer(currentLevel) {
       $("body").removeClass("game-over");
     }, 200);
     // Change the heading to indicate the game is over and prompt to restart
-    $("h1").html("Game Over, Press Any Key to Restart");
+    $("h1").html("Game Over, Press Any Key or Tap to Restart");
     // Call startOver to reset the game variables
     startOver();
   }
