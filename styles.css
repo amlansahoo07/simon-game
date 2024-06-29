@@ -12,8 +12,40 @@ body {
 #level-title {
   font-family: 'Press Start 2P', cursive;
   font-size: 3rem;
-  margin:  5%;
+  margin:  4%;
   color: #FEF2BF;
+}
+
+#instructions-button {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.5rem;
+  margin: 10px;
+  padding: 10px;
+  color: #011F3F;
+  background-color: #FEF2BF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#instructions {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1rem;
+  color: #FEF2BF;
+  background-color: #011F3F;
+  border: 2px solid #FEF2BF;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px;
+  display: none; /* Hidden by default */
+}
+
+.hidden {
+  display: none;
+}
+
+#instructions p {
+  color: white;
 }
 
 .container {
@@ -74,6 +106,9 @@ body {
 
 @media (min-width: 377px) and (max-width: 640px) {
 
+  #instructions-button {
+    font-size: 1rem;
+  }
   #level-title {
     font-size: 2rem;
   }
@@ -86,6 +121,9 @@ body {
 
 @media (max-width: 376px) {
 
+  #instructions-button {
+    font-size: 1rem;
+  }
   #level-title {
     font-size: 1.5rem;
   }

@@ -9,48 +9,49 @@ var userClickedPattern = [];
 var started = false;
 var level = 0;
 
-// Start the game on a key press
-// $(document).keydown(function () {
-//   if (!started) {
-//     // Update the level title and start the first sequence
-//     $("h1").html("Level " + level);
-//     nextSequence();
-//     started = true;
-//   }
-// });
-
-// Start the game on key press or touch event
-$(document).on("keydown touchstart", function(event) {
+// Start the game on key press or tap (excluding instructions button tap)
+$(document).on("keydown", function(event) {
   if (!started) {
-      $("h1").html("Level " + level);
-      nextSequence();
-      started = true;
+    startGame();
   }
 });
+
+$(document).on("touchstart", function(event) {
+  if (!started && !$(event.target).is("#instructions-button")) {
+    startGame();
+  }
+});
+
+// Toggle instruction visibility and button text
+$("#instructions-button").click(function() {
+  $("#instructions").toggle();
+  var buttonText = $("#instructions").is(":visible") ? "Hide Instructions" : "Show Instructions";
+  $("#instructions-button").text(buttonText);
+});
+
 
 // Handle button clicks
 $(".btn").click(function() {
   if (started) { // Check if the game has started
-      var userChosenColour = $(this).attr("id");
-      userClickedPattern.push(userChosenColour);
-      playSound(userChosenColour);
-      animatePress(userChosenColour);
-      checkAnswer(userClickedPattern.length - 1);
+    // Get the ID of the clicked button and add it to the user clicked pattern
+    var userChosenColour = $(this).attr("id");
+    userClickedPattern.push(userChosenColour);
+
+    // Play the corresponding sound and animate the button press
+    playSound(userChosenColour);
+    animatePress(userChosenColour);
+
+    // Check the user's answer after each click
+    checkAnswer(userClickedPattern.length - 1);
   }
 });
-// $(".btn").click(function () {
-//   // Get the ID of the clicked button and add it to the user clicked pattern
-//   var userChosenColour = $(this).attr("id");
-//   userClickedPattern.push(userChosenColour);
-//   console.log(userClickedPattern);
 
-//   // Play the corresponding sound and animate the button press
-//   playSound(userChosenColour);
-//   animatePress(userChosenColour);
-
-//   // Check the user's answer after each click
-//   checkAnswer(userClickedPattern.length - 1);
-// });
+// Function to start the game
+function startGame() {
+  $("h1").html("Level " + level);
+  nextSequence();
+  started = true;
+}
 
 // Generate the next sequence in the game pattern
 function nextSequence() {
