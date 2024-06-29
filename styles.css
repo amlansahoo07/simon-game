@@ -1,6 +1,12 @@
 body {
   text-align: center;
   background-color: #011F3F;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 
 #level-title {
@@ -11,10 +17,13 @@ body {
 }
 
 .container {
-  display: block;
-  width: 50%;
-  margin: auto;
-
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  max-width: 600px;
+  margin-top: 20px;
 }
 
 .btn {
@@ -50,4 +59,39 @@ body {
 .pressed {
   box-shadow: 0 0 20px white;
   background-color: grey;
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+
+  #level-title {
+    font-size: 2.5rem;
+  }
+  .btn {
+    height: 150px; /* Adjust button size for smaller screens */
+    width: 150px;
+  }
+}
+
+@media (min-width: 377px) and (max-width: 640px) {
+
+  #level-title {
+    font-size: 2rem;
+  }
+  .btn {
+    height: 100px; /* Adjust button size for smaller screens */
+    width: 100px;
+    margin: 15px;
+  }
+}
+
+@media (max-width: 376px) {
+
+  #level-title {
+    font-size: 1.5rem;
+  }
+  .btn {
+    height: 75px; /* Adjust button size for smaller screens */
+    width: 75px;
+    margin: 10px;
+  }
 }
